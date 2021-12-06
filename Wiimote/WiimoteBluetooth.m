@@ -9,16 +9,15 @@
 
 #import <IOBluetooth/IOBluetooth.h>
 
-extern Boolean IOBluetoothLocalDeviceAvailable(void);
-extern IOReturn IOBluetoothLocalDeviceGetPowerState(BluetoothHCIPowerState *state);
+//extern Boolean IOBluetoothLocalDeviceAvailable(void);
+//extern IOReturn IOBluetoothLocalDeviceGetPowerState(BluetoothHCIPowerState *state);
 
 BOOL wiimoteIsBluetoothEnabled(void)
 {
-    if (IOBluetoothLocalDeviceAvailable())
+    if ([IOBluetoothHostController defaultController])
     {
-        BluetoothHCIPowerState powerState = kBluetoothHCIPowerStateOFF;
-        if (IOBluetoothLocalDeviceGetPowerState(&powerState) == kIOReturnSuccess)
-            return (powerState == kBluetoothHCIPowerStateON);
+        return [[IOBluetoothHostController defaultController] powerState]
+             == kBluetoothHCIPowerStateON;
     }
     return NO;
 }

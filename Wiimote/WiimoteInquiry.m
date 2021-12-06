@@ -272,7 +272,7 @@ NSString *WiimoteDeviceNameBalanceBoard = @"Nintendo RVL-WBC-01";
 
     if (error == kIOReturnSuccess)
     {
-        if ([self isUseOneButtonClickConnection])
+        if ([self isUseOneButtonClickConnection] || true)
             [self pairWithDevices:[_inquiry foundDevices]];
         else
             [self connectToDevices:[_inquiry foundDevices]];
